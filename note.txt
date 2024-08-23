@@ -1,0 +1,4 @@
+Library demo for Roll-Call in C
+- All allocations should be made with "rc_create(<type *>, <name>, <bytes>)
+- When collection is needed, "rc_collect()" needs to be run
+- rc_collect should not be run in the middle of a function, since there may be temporary data being used

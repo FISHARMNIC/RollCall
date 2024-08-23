@@ -2,7 +2,7 @@
 ###### Nicolas Quijano: 2024
 ---
 ### Synopsis
-Roll-Call is a process for automatic garbage collection in computer programs. It can be implemented within high-level compilers, or on top of existing languages such as C (as seen in this demo). The documentation on how it works can be seen [here](https://docs.google.com/document/d/1QuzjmCHom5GTrUtEr_k-quwfyHSAI56a1qNorQ3JXIk/edit#heading=h.pwjw16621fwq)
+Roll-Call is a process designed by Nicolas Quijano for automatic garbage collection in computer programs. It can be implemented within high-level compilers, or on top of existing languages such as C (as seen in this demo). The documentation on how it works can be seen [here](https://docs.google.com/document/d/1QuzjmCHom5GTrUtEr_k-quwfyHSAI56a1qNorQ3JXIk/edit#heading=h.pwjw16621fwq).
 
 
 ### Demo

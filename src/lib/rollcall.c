@@ -39,7 +39,13 @@ void rc_collect()
         roster_entry_t *roster_entry = list->item;
         assert(roster_entry != 0);
 
-        int *owner_points_to = *((int **)roster_entry->owner);
+        int **owner_reference = (int **)roster_entry->owner;
+        int *owner_points_to = 0;
+        if(owner_reference != 0)
+        {
+            owner_points_to = *((int **)roster_entry->owner);
+        }
+        
         int *owner_should_point_to = (int *)roster_entry->pointer;
 
         if (owner_points_to != owner_should_point_to)

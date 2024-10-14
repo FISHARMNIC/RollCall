@@ -6,7 +6,7 @@ Roll-Call is a process designed by Nicolas Quijano for automatic garbage collect
 
 
 ### Demo
-The code in this repository is an example of it being implemented on top of C.
+The code in this repository is an example of it being implemented on top of C.  
 **Please note that this code is meant to be compiled and run in 32bit mode**
 
 `rc_create(type, name, bytes, bool);`

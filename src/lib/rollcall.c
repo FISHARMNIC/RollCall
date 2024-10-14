@@ -39,10 +39,10 @@ void rc_collect()
         int *owner_points_to = 0;
         if(owner_reference != 0)
         {
-            owner_points_to = *((int **)roster_entry->owner);
+            owner_points_to = *owner_reference;
         }
         
-        int *owner_should_point_to = (int *)roster_entry->pointer;
+        int *owner_should_point_to = (int *)(roster_entry->pointer);
 
         if (owner_points_to != owner_should_point_to)
         {

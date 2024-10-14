@@ -16,3 +16,6 @@ The code in this repository is an example of it being implemented on top of C.
 
 `rc_collect()`
 * Frees all leaked memory. This should be done at the end of a function.
+
+`rc_free_all()`
+* Frees all allocation memory. Should be done at program exit.

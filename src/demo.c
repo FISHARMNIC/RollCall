@@ -45,5 +45,6 @@ int main()
     // Enabling this line will trigger an error since allocation2 is restricted
     //rc_requestOwnership(allocation1, allocation2, char*);
 
+    // This can be run to just delete everything
     rc_free_all();
 }

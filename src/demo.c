@@ -35,7 +35,7 @@ int main()
     /* 
      * Here, the pointers are being focefully altered in order to trigger the garbage collector 
     */
-    allocation1 = (char*) 00;
+    allocation1 = (char*) 0;
     /*
      * Depending on the compiler, more than one discard may appear
      * This is because running the "test" function twice caused 4 leaks

@@ -52,6 +52,7 @@ void linked_add(Linked_t **list_db, roster_entry_t *item)
     }
 }
 
+/*
 Linked_t *linked_remove(Linked_t **list_db, int index)
 {
     Linked_t * list = *list_db;
@@ -73,6 +74,38 @@ Linked_t *linked_remove(Linked_t **list_db, int index)
         return list;
     }
     //return list;
+}
+*/
+Linked_t *linked_remove(Linked_t **list_db, Linked_t *item)
+{
+    Linked_t * list = *list_db;
+    if (list != item)
+    {
+        while(list->next != item)
+        {
+            list = list->next;
+            assert(list->next != (void*)0);
+        }
+        Linked_t *nextPtr = list->next->next;
+        //memset(list->next->item->pointer, 0, list->next->item->size);
+        
+        free(list->next->item);
+        free(list->next);
+
+        list->next = nextPtr;
+        return nextPtr;
+    }
+    else
+    {
+        Linked_t *nextPtr = list->next;
+        //memset(list->item->pointer, 0, list->item->size);
+        
+        free(list->item);
+        free(list);
+        
+        *list_db = nextPtr;
+        return nextPtr;
+    }
 }
 
 int linked_itemExists(Linked_t* list, roster_entry_t* _item)

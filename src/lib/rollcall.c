@@ -3,6 +3,8 @@
 
 Linked_t *Roster = 0;
 
+const int SIZE_ROSTER_AND_ENTRY = (sizeof(roster_entry_t) + sizeof(roster_entry_t *));
+/*
 void *rc_allocate(int size_bytes, int restricted)
 {
     // Note, here using malloc which also stores size.
@@ -10,7 +12,6 @@ void *rc_allocate(int size_bytes, int restricted)
 
     roster_entry_t *roster_entry = malloc(sizeof(roster_entry_t));
     described_buffer_t *described_buffer = malloc(sizeof(roster_entry_t *) + size_bytes);
-
     assert(roster_entry != 0);
     assert(described_buffer != 0);
 
@@ -27,13 +28,33 @@ void *rc_allocate(int size_bytes, int restricted)
 
     return roster_entry->pointer;
 }
+*/
+
+void *rc_allocate(int size_bytes, int restricted)
+{
+    roster_entry_t *roster_entry = malloc(SIZE_ROSTER_AND_ENTRY + size_bytes + 1);
+    described_buffer_t *described_buffer = (described_buffer_t *) (((char*)roster_entry) + sizeof(roster_entry_t));
+
+    assert(roster_entry != 0);
+
+    described_buffer->entry_reference = roster_entry;
+
+    roster_entry->owner = 0;
+    roster_entry->restricted = restricted;
+    roster_entry->size = size_bytes;
+    roster_entry->pointer = &(described_buffer->data);
+
+    linked_add(&Roster, roster_entry);
+    printf("Allocated Roster[%i] {%i} @%p\n", linked_getSize(Roster), size_bytes, &(described_buffer->data));
+
+    return roster_entry->pointer;
+}
 
 void rc_collect()
 {
     printf("/------Collecting-----\\\n");
     Linked_t *list = Roster;
 
-    int index = 0;
     while (list != 0)
     {
         roster_entry_t *roster_entry = list->item;
@@ -50,17 +71,27 @@ void rc_collect()
 
         if (owner_points_to != owner_should_point_to)
         {
-            printf("|- Discarding Roster[%i] @%p\n", index, owner_should_point_to);
-            free(owner_should_point_to - 1);
-            list = linked_remove(&Roster, index);
+            printf("|- Discarding item @%p\n", owner_should_point_to);
+            list = linked_remove(&Roster, list);
         }
         else
         {
-
             list = list->next;
-            index++;
         }
     }
 
     printf("\\---------------------/\n");
+}
+
+void rc_free_all()
+{
+    Linked_t *list = Roster;
+
+    while (list != 0)
+    {
+        roster_entry_t *roster_entry = list->item;
+        assert(roster_entry != 0);
+        printf("|- Discarding item %p\n", roster_entry->pointer);
+        list = linked_remove(&Roster, list);
+    }
 }

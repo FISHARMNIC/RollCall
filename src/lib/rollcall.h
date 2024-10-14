@@ -8,6 +8,7 @@
 
 void *rc_allocate(int, int);
 void rc_collect();
+void rc_free_all();
 
 typedef struct roster_entry_t
 {

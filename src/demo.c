@@ -43,5 +43,7 @@ int main()
     rc_collect();
 
     // Enabling this line will trigger an error since allocation2 is restricted
-    // rc_requestOwnership(allocation1, allocation2, char*);
+    //rc_requestOwnership(allocation1, allocation2, char*);
+
+    rc_free_all();
 }

@@ -60,13 +60,19 @@ void rc_collect()
 
 void rc_free_all()
 {
-    Linked_t *list = Roster;
+    Linked_t * list = Roster->next;
+    if(Roster == (void*)0)
+        return;
+        
+    free(Roster->item);
+    free(Roster);
 
-    while (list != 0)
+    while(list != (void*) 0)
     {
-        roster_entry_t *roster_entry = list->item;
-        assert(roster_entry != 0);
-        printf("|- Discarding item %p\n", roster_entry->pointer);
-        list = linked_remove(&Roster, list);
+        Linked_t * nextPtr = list->next;
+        printf("|- Discarding item %p\n", list->item->pointer);
+        free(list->item);
+        free(list);
+        list = nextPtr;
     }
 }

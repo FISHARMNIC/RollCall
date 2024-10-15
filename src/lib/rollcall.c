@@ -60,9 +60,12 @@ void rc_collect()
 
 void rc_free_all()
 {
-    Linked_t * list = Roster->next;
+    Linked_t * list;
+    
     if(Roster == (void*)0)
         return;
+    
+    list = Roster->next;
         
     free(Roster->item);
     free(Roster);
